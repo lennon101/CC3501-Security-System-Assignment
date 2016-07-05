@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CC Gods Security</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename="css/bootstrap.min.css")}}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename="css/sb-admin.css")}}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename="font-awesome/css/font-awesome.min.css")}}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--enable ability to import navBar to multiple pages -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <style>
+        .container-canvas {
+            margin-right: auto;
+            margin-left: auto;
+            width: 800px;
+        }
+
+    </style>
+
+    <script language="Javascript">
+        var xhttp = new XMLHttpRequest();
+        var url = "{{ url_for('image') }}"; //url to load image from
+        var refreshInterval = 1000; //in ms
+        var img;
+        var drawDate = true; //draw date string
+
+        function doScreenshot() {
+            xhttp.open("GET", "/screenshot", true);
+            xhttp.send();
+        }
+        function doEmail() {
+            xhttp.open("GET", "/email", true);
+            xhttp.send();
+        }
+        function doArm() {
+            xhttp.open("GET", "/arm", true);
+            xhttp.send();
+        }
+        function doDisarm() {
+            xhttp.open("GET", "/disarm", true);
+            xhttp.send();
+        }
+        function doEnableVoice() {
+            xhttp.open("GET", "/voiceon", true);
+            xhttp.send();
+        }
+        function doDisableVoice() {
+            xhttp.open("GET", "/voiceoff", true);
+            xhttp.send();
+        }
+        function init() {
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            img = new Image();
+            img.onload = function() {
+                canvas.setAttribute("width", img.width)
+                canvas.setAttribute("height", img.height)
+                context.drawImage(this, 0, 0);
+                if(drawDate) {
+                    var now = new Date();
+                    var text = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+                    var maxWidth = 100;
+                    var x = img.width-10-maxWidth;
+                    var y = img.height-10;
+                    context.strokeStyle = 'black';
+                    context.lineWidth = 2;
+                    context.strokeText(text, x, y, maxWidth);
+                    context.fillStyle = 'white';
+                    context.fillText(text, x, y, maxWidth);
+                }
+            };
+            refresh();
+        }
+
+        function refresh(){
+            img.src = url + "?t=" + new Date().getTime();
+            setTimeout("refresh()",refreshInterval);
+        }
+    </script>
+</head>
+
+
+
+<body onload="JavaScript:init();">
+
+<div id="wrapper">
+    <!-- Navigation UPDATE FROM HERE -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Security Settings</a>
+        </div>
+
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="/viewSnapShots"><i class="fa fa-eye"></i> View SnapShot</a>
+                </li>
+                <li>
+                    <a href="/emailSetup"><i class="fa fa-envelope-o"></i> Email Setup</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <!--UPdate navigation UNTIL HERE-->
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        CC3501 Security System <small>By CC Gods Inc</small>
+                    </h1>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>  <strong> Indoor Security System: View your live stream here. Navigate using the tabs to view snapshots or change the user's email address. </strong>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div style="width:800px; margin:0 auto;">
+                <div class="form-group">
+                    <div class="container-canvas">
+                        <canvas id="canvas"/>
+                    </div>
+                </div>
+
+                <div class="form-group" style="width:800px; margin:15px auto;">
+                    <div class = "row" style="width:800px; margin:0 auto;">
+                        <div class ="col-md-12" style="width:800px; margin:0 auto;">
+                            <button type="button" class="btn btn-lg btn-danger" style="width:180px; margin: 0px 10px" onClick="doArm();">Arm</button>
+                            <button type="button" class="btn btn-lg btn-success" style="width:180px; margin: 0px 10px" onClick="doDisarm();">Disarm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="width:800px; margin:15px auto;">
+                    <div class = "row" style="width:800px; margin:0 auto;">
+                        <div class ="col-md-12" style="width:800px; margin:0 auto;">
+                            <button type="button" class="btn btn-lg btn-primary" style="width:180px; margin: 0px 10px" onClick="doScreenshot();" >Save a SnapShot</button>
+                            <button type="button" class="btn btn-lg btn-primary"style="width:180px; margin: 0px 10px" onClick="doEmail();">Email a SnapShot</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="width:800px; margin:15px auto;">
+                    <div class = "row" style="width:800px; margin:0 auto;">
+                        <div class ="col-md-12" style="width:800px; margin:0 auto;">
+                            <button type="button" class="btn btn-lg btn-info" style="width:180px; margin: 0px 10px" onClick="doEnableVoice();">Enable Voice</button>
+                            <button type="button" class="btn btn-lg btn-warning"style="width:180px; margin: 0px 10px" onClick="doDisableVoice();">Disable Voice</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ url_for('static', filename="js/bootstrap.min.js")}}"></script>
+
+</body>
+
+</html>

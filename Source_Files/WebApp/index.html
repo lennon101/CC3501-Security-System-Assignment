@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--enable ability to import navBar to multiple pages -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            <!--include Navigation bar content -->
+            $("#includedContent").load("navBar.html");
+        });
+    </script>
+
+    <style>
+        .container-canvas {
+            margin-right: auto;
+            margin-left: auto;
+            width: 800px;
+        }
+    </style>
+
+    <script type="text/JavaScript">
+        var url = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcToZGEWvIBFgCiona6d74FtVthl4lkdJg3d61SGy-UCf4qFuDLD"; //url to load image from
+        var refreshInterval = 1000; //in ms
+        var drawDate = true; //draw date string
+        var img;
+
+        function init() {
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+
+            img = new Image();
+            img.onload = function() {
+                canvas.setAttribute("width", img.width)
+                canvas.setAttribute("height", img.height)
+                context.drawImage(this, 0, 0);
+                if(drawDate) {
+                    var now = new Date();
+                    var text = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+                    var maxWidth = 100;
+                    var x = img.width-10-maxWidth;
+                    var y = img.height-10;
+                    context.strokeStyle = 'black';
+                    context.lineWidth = 2;
+                    context.strokeText(text, x, y, maxWidth);
+                    context.fillStyle = 'white';
+                    context.fillText(text, x, y, maxWidth);
+                }
+            };
+        }
+        function refresh(){
+            img.src = url + "?t=" + new Date().getTime();
+            setTimeout("refresh()",refreshInterval);
+        }
+    </script>
+
+</head>
+
+
+
+<body onload="JavaScript:init();">
+
+    <div id="wrapper">
+        <!-- Navigation -->
+            <div id="includedContent"></div>
+        <!-- /.navbar-collapse -->
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            CC3501 Security System <small>By CC Gods Inc</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>Potential place for alerts that are dismissible</strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <!--
+                <div class="container-canvas">
+                    <canvas width="800" height="480">
+                    </canvas>
+                </div>
+                -->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img class="img-thumbnail" src="http://placehold.it/400x400" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class = "row">
+                        <div class ="col-md-12">
+                            <button type="button" class="btn btn-lg btn-danger" style="width:180px; margin: 0px 10px">Arm</button>
+                            <button type="button" class="btn btn-lg btn-success" style="width:180px; margin: 0px 10px" >Disarm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class = "row">
+                        <div class ="col-md-12">
+                            <button type="button" class="btn btn-lg btn-primary" style="width:180px; margin: 0px 10px" >Save a SnapShot</button>
+                            <button type="button" class="btn btn-lg btn-primary"style="width:180px; margin: 0px 10px">Email a SnapShot</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class = "row">
+                        <div class ="col-md-12">
+                            <button type="button" class="btn btn-lg btn-info" style="width:180px; margin: 0px 10px">Enable Voice</button>
+                            <button type="button" class="btn btn-lg btn-warning"style="width:180px; margin: 0px 10px">Diable Voice</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+</body>
+
+</html>

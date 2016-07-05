@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Video Streaming Demonstration</title>
+
+</head>
+<body>
+  <h2>Toggle Button for Screenshot</h2>
+  <script language="Javascript">
+  var xhttp = new XMLHttpRequest();
+  function doScreenshot() {
+    xhttp.open("GET", "/screenshot", true);
+    xhttp.send();
+  }
+  </script>
+
+  <script language="Javascript">
+  var xhttp = new XMLHttpRequest();
+  function doEmail() {
+    xhttp.open("GET", "/email", true);
+    xhttp.send();
+  }
+  </script>
+
+  <button onClick="doScreenshot();">Screenshot</button>
+
+  <button onClick="doEmail();">Send Email</button>
+  <P><img src="{{ url_for('static',filename="1.png")}}"></P>
+
+</body>
+
+
+</html>
+
+
+
+
+

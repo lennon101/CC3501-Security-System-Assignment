@@ -1,0 +1,49 @@
+Language model created by QuickLM on Sat Oct 17 04:39:27 EDT 2015
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 6 sentences and 8 words
+
+\data\
+ngram 1=8
+ngram 2=12
+ngram 3=6
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.5563 ARM -0.2218
+-1.5563 DISARM -0.2218
+-1.5563 GOODBYE -0.2218
+-1.5563 HELLO -0.2218
+-1.5563 TAKEPHOTO -0.2218
+-1.5563 TESTMOTION -0.2218
+
+\2-grams:
+-1.0792 <s> ARM 0.0000
+-1.0792 <s> DISARM 0.0000
+-1.0792 <s> GOODBYE 0.0000
+-1.0792 <s> HELLO 0.0000
+-1.0792 <s> TAKEPHOTO 0.0000
+-1.0792 <s> TESTMOTION 0.0000
+-0.3010 ARM </s> -0.3010
+-0.3010 DISARM </s> -0.3010
+-0.3010 GOODBYE </s> -0.3010
+-0.3010 HELLO </s> -0.3010
+-0.3010 TAKEPHOTO </s> -0.3010
+-0.3010 TESTMOTION </s> -0.3010
+
+\3-grams:
+-0.3010 <s> ARM </s>
+-0.3010 <s> DISARM </s>
+-0.3010 <s> GOODBYE </s>
+-0.3010 <s> HELLO </s>
+-0.3010 <s> TAKEPHOTO </s>
+-0.3010 <s> TESTMOTION </s>
+
+\end\
